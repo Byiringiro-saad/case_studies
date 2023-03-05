@@ -147,7 +147,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 30px 0 0 0;
+    margin: 30px 0 50px 0;
     padding: 0 20px;
 
     .nav {
