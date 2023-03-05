@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 //images
 import one from "../assets/one.png";
 import two from "../assets/two.png";
-import three from "../assets/three.png";
 import four from "../assets/four.png";
 import five from "../assets/five.png";
+import three from "../assets/three.png";
+
+//components
+import Cases from "../component/cases/cases";
 
 const Case_Studies = () => {
   return (
@@ -46,6 +50,21 @@ const Case_Studies = () => {
             <img src={five} alt="five" />
             <p>Reinforcement Learning </p>
           </div>
+        </div>
+      </div>
+      <div className="cases">
+        <ul className="nav">
+          <li>Financial Services</li>
+          <li>Banking</li>
+          <li>Legal</li>
+          <li>Sales</li>
+          <li>Healthcare</li>
+          <li>Media and Entertainment</li>
+          <li>E-commerce</li>
+          <li>Surveillance</li>
+        </ul>
+        <div className="case">
+          <Cases />
         </div>
       </div>
     </Container>
@@ -101,7 +120,7 @@ const Container = styled.div`
     padding: 0 20px;
 
     p.title {
-      font-size: 1.1em;
+      font-size: 1.2em;
       font-weight: 700;
       margin: 0 0 25px 0;
     }
@@ -119,6 +138,42 @@ const Container = styled.div`
           margin: 5px 0 0 0;
         }
       }
+    }
+  }
+
+  .cases {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 30px 0 0 0;
+    padding: 0 20px;
+
+    .nav {
+      width: 20%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+
+      li {
+        list-style: none;
+        line-height: 50px;
+        margin: 5px 0;
+        padding: 0 0 0 5px;
+        color: var(--dark);
+        border-bottom: 1px dashed var(--gray);
+        cursor: pointer;
+
+        :hover {
+          color: var(--blue);
+        }
+      }
+    }
+
+    .case {
+      width: 78%;
+      height: auto;
     }
   }
 `;
