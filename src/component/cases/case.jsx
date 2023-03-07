@@ -1,35 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
-//images
-import client from "../../assets/maxx.png";
-import pla_1 from "../../assets/pla_1.png";
-import pla_2 from "../../assets/pla_2.png";
-import pla_3 from "../../assets/pla_3.png";
-
-const Case = () => {
+const Case = (props) => {
   return (
     <Container>
       <div className="head">
-        <p>Digital strategy and implementation for a health tech startup</p>
+        <p>{props?.case?.title}</p>
       </div>
       <div className="about">
         <div className="client">
-          <img src={client} alt="client" />
+          <img src={props?.case?.logo} alt="client" />
           <div className="more">
             <p>
-              <span>Location:</span> India
+              <span>Location:</span> {props?.case?.location}
             </p>
             <p>
-              <span>Website:</span> www.maxxwellness.com
+              <span>Website:</span> {props?.case?.website}
             </p>
           </div>
         </div>
         <div className="desc">
           <p>
-            <span>Project background:</span> A health and wellness startup
-            providing holistic wellness programs was looking for a partner to
-            develop and implement digital strategy.
+            <span>Project background:</span> {props?.case?.background}
           </p>
         </div>
       </div>
@@ -37,24 +29,17 @@ const Case = () => {
         <div className="problem">
           <p className="title">Problem statement</p>
           <ul>
-            <li>No digital infrastructure</li>
-            <li>Zero presence in social media</li>
-            <li>Aligning with brand strategy of family wellness</li>
-            <li>Limited marketing budget</li>
+            {props?.case?.problems?.map((item, _) => (
+              <li key={_}>{item}</li>
+            ))}
           </ul>
         </div>
         <div className="solution">
           <p className="title">Solutions</p>
           <ul>
-            <li>Developed a digital strategy plan for next 3 years</li>
-            <li>
-              Digital infrastructure setup (Website upgrade, chatbot
-              implementation, Performance optimization, SEO audit and
-              Optimization and Social media setup)
-            </li>
-            <li>Branding and awareness campaigns, Follower campaigns</li>
-            <li>Lead generation, ORM, Minimal Viable Campaign</li>
-            <li>Growth hacking and influencer marketing</li>
+            {props?.case?.solutions?.map((item, _) => (
+              <li key={_}>{item}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -62,44 +47,30 @@ const Case = () => {
         <div className="problem">
           <p className="title">Challenges</p>
           <ul>
-            <li>Pandemic impact</li>
-            <li>Competitive environment</li>
-            <li>Limited marketing budget</li>
+            {props?.case?.challenges?.map((item, _) => (
+              <li key={_}>{item}</li>
+            ))}
           </ul>
         </div>
         <div className="platforms">
           <p className="title">Platforms and tools used</p>
           <ul>
-            <li>
-              <img src={pla_1} alt="one" />
-            </li>
-            <li>
-              <img src={pla_2} alt="one" />
-            </li>
-            <li>
-              <img src={pla_3} alt="one" />
-            </li>
+            {props?.case?.platforms?.map((item, _) => (
+              <li key={_}>
+                <img src={item} alt="one" />
+              </li>
+            ))}
           </ul>
         </div>
       </div>
       <div className="results">
         <p className="title">Results</p>
         <div className="boxes">
-          <div className="box">
-            <p>Increase in overall visibility of brand online</p>
-          </div>
-          <div className="box">
-            <p>
-              Engagement with prospective audience on website and other digital
-              channels
-            </p>
-          </div>
-          <div className="box">
-            <p>
-              Acquired 1000+ new customers in First 6 months (20% more) as per
-              the plan within planned budget
-            </p>
-          </div>
+          {props?.case?.results?.map((item, _) => (
+            <div key={_} className="box">
+              <p>{item}</p>
+            </div>
+          ))}
         </div>
       </div>
     </Container>
@@ -148,6 +119,7 @@ const Container = styled.div`
       justify-content: flex-start;
 
       img {
+        width: 120px;
         margin: 0 20px 0 0;
       }
 

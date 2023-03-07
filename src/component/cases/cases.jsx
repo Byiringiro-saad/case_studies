@@ -1,26 +1,56 @@
-import React from "react";
 import styled from "styled-components";
+import React, { useState } from "react";
 
 //icons
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
 //components
 import Case from "./case";
+import { useSelector } from "react-redux";
 
-const Cases = () => {
+const Cases = ({ activeType }) => {
+  //local data
+  const [index, setIndex] = useState(0);
+
+  //cases
+  const cases = useSelector((state) => state.cases.cases);
+  const activeCases = cases.filter((item) => item.type === activeType);
+
+  const handlePrevious = () => {
+    const newIndex = index - 1;
+    setIndex(newIndex < 0 ? activeCases?.length - 1 : newIndex);
+  };
+
+  const handleNext = () => {
+    const newIndex = index + 1;
+    setIndex(newIndex >= activeCases?.length ? 0 : newIndex);
+  };
+
   return (
     <Container>
       <div className="top">
-        <div className="direction">
+        <div className="direction" onClick={handlePrevious}>
           <BiChevronLeft />
         </div>
-        <p className="title">MAXX</p>
-        <div className="direction">
+        <p className="title">{activeCases[index]?.company}</p>
+        <div className="direction" onClick={handleNext}>
           <BiChevronRight />
         </div>
       </div>
       <div className="content">
-        <Case />
+        {activeCases.length === 0 ? (
+          <div className="none">
+            <p>...</p>
+          </div>
+        ) : (
+          <>
+            {activeCases.map((item, _) => {
+              return (
+                index === item?.id && <Case key={_} case={item} data={item} />
+              );
+            })}
+          </>
+        )}
       </div>
     </Container>
   );
@@ -47,6 +77,7 @@ const Container = styled.div`
 
     p.title {
       font-weight: 800;
+      text-transform: uppercase;
     }
 
     .direction {
@@ -63,6 +94,20 @@ const Container = styled.div`
   .content {
     width: 100%;
     height: auto;
+
+    .none {
+      width: 100%;
+      height: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        line-height: 100px;
+        font-size: 1.2em;
+        color: var(--dark);
+      }
+    }
   }
 `;
 

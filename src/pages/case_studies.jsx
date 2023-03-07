@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 //images
 import one from "../assets/one.png";
@@ -13,6 +13,15 @@ import three from "../assets/three.png";
 import Cases from "../component/cases/cases";
 
 const Case_Studies = () => {
+  //local data
+  const [activeCase, setActiveCase] = React.useState("Financial Services");
+
+  const types = useSelector((state) => state.types.types);
+
+  const handleActiveType = (type) => {
+    setActiveCase(type);
+  };
+
   return (
     <Container>
       <div className="header">
@@ -54,17 +63,18 @@ const Case_Studies = () => {
       </div>
       <div className="cases">
         <ul className="nav">
-          <li>Financial Services</li>
-          <li>Banking</li>
-          <li>Legal</li>
-          <li>Sales</li>
-          <li>Healthcare</li>
-          <li>Media and Entertainment</li>
-          <li>E-commerce</li>
-          <li>Surveillance</li>
+          {types?.map((item, _) => (
+            <li
+              key={_}
+              onClick={() => handleActiveType(item)}
+              className={item === activeCase ? "active" : ""}
+            >
+              {item}
+            </li>
+          ))}
         </ul>
         <div className="case">
-          <Cases />
+          <Cases activeType={activeCase} />
         </div>
       </div>
     </Container>
@@ -168,6 +178,11 @@ const Container = styled.div`
         :hover {
           color: var(--blue);
         }
+      }
+
+      li.active {
+        color: var(--blue);
+        border-bottom: 1px solid var(--blue);
       }
     }
 
