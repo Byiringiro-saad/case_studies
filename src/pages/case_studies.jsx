@@ -110,7 +110,8 @@ const Container = styled.div`
   }
 
   @media only screen and (max-width: 1200px) {
-    width: 90%;
+    width: 95%;
+    align-items: center;
   }
 
   .header {
@@ -157,9 +158,16 @@ const Container = styled.div`
       height: auto;
       display: flex;
       flex-direction: row;
+      align-items: center;
       justify-content: space-between;
 
       .box {
+        @media only screen and (max-width: 1200px) {
+          img {
+            width: 170px;
+          }
+        }
+
         p {
           color: var(--gray);
           margin: 5px 0 0 0;
