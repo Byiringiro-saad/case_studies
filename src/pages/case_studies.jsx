@@ -110,7 +110,7 @@ const Container = styled.div`
   }
 
   @media only screen and (max-width: 1200px) {
-    width: 95%;
+    width: 100%;
     align-items: center;
   }
 
@@ -161,11 +161,19 @@ const Container = styled.div`
       align-items: center;
       justify-content: space-between;
 
+      @media only screen and (max-width: 1024px) {
+        flex-wrap: wrap;
+      }
+
       .box {
         @media only screen and (max-width: 1200px) {
           img {
             width: 170px;
           }
+        }
+
+        @media only screen and (max-width: 1024px) {
+          margin: 0 0 10px 0;
         }
 
         p {
@@ -185,11 +193,23 @@ const Container = styled.div`
     margin: 30px 0 50px 0;
     padding: 0 20px;
 
+    @media only screen and (max-width: 1024px) {
+      flex-direction: column;
+    }
+
     .nav {
       width: 20%;
       height: auto;
       display: flex;
       flex-direction: column;
+
+      @media only screen and (max-width: 1024px) {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        margin: 0 0 20px 0;
+      }
 
       li {
         list-style: none;
@@ -199,6 +219,11 @@ const Container = styled.div`
         color: var(--dark);
         border-bottom: 1px dashed var(--gray);
         cursor: pointer;
+
+        @media only screen and (max-width: 1024px) {
+          margin: 0 7px 0 0;
+          padding: 0;
+        }
 
         :hover {
           color: var(--blue);
@@ -214,6 +239,10 @@ const Container = styled.div`
     .case {
       width: 78%;
       height: auto;
+
+      @media only screen and (max-width: 1024px) {
+        width: 100%;
+      }
     }
   }
 `;
