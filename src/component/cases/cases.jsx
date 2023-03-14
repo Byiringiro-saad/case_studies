@@ -1,20 +1,26 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs, getFirestore, getDoc } from "firebase/firestore";
 
 //icons
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
+//features
+import app from "../../features/firebase";
+
 //components
 import Case from "./case";
-import { useSelector } from "react-redux";
 
 const Cases = ({ activeType }) => {
+  //configs
+  const firestore = getFirestore(app);
+
   //local data
   const [index, setIndex] = useState(0);
-
-  //cases
-  const cases = useSelector((state) => state.cases.cases);
-  const activeCases = cases.filter((item) => item.type === activeType);
+  const [cases, setCases] = useState([]);
+  const activeCases = cases.filter(
+    (item) => item.type.toLowerCase() === activeType
+  );
 
   const handlePrevious = () => {
     const newIndex = index - 1;
@@ -25,6 +31,20 @@ const Cases = ({ activeType }) => {
     const newIndex = index + 1;
     setIndex(newIndex >= activeCases?.length ? 0 : newIndex);
   };
+
+  useEffect(() => {
+    getDocs(collection(firestore, "cases")).then((data) => {
+      let docs = data?.docs;
+      docs?.forEach((doc) => {
+        getDoc(doc?.data().type).then((data) => {
+          setCases((prev) => [
+            ...prev,
+            { ...doc?.data(), type: data?.data()?.name },
+          ]);
+        });
+      });
+    });
+  }, []);
 
   return (
     <Container>
@@ -43,13 +63,7 @@ const Cases = ({ activeType }) => {
             <p>...</p>
           </div>
         ) : (
-          <>
-            {activeCases.map((item, _) => {
-              return (
-                index === item?.id && <Case key={_} case={item} data={item} />
-              );
-            })}
-          </>
+          <Case case={activeCases[index]} data={activeCases[index]} />
         )}
       </div>
     </Container>

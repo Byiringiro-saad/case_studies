@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Case = (props) => {
+  console.log(props?.case);
+
+  const logo = props?.case?.logo?.split("view")[0];
+
   return (
     <Container>
       <div className="head">
@@ -9,7 +13,7 @@ const Case = (props) => {
       </div>
       <div className="about">
         <div className="client">
-          <img src={props?.case?.logo} alt="client" />
+          <img src={props?.case?.logo?.split("view")[0]} alt="client" />
           <div className="more">
             <p>
               <span>Location:</span> {props?.case?.location}
@@ -255,7 +259,7 @@ const Container = styled.div`
 
       .box {
         width: 32%;
-        height: 100px;
+        min-height: 100px;
         padding: 15px;
         background: #f2f2f2;
 

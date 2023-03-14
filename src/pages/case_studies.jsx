@@ -1,6 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { collection, getDocs, getFirestore } from "@firebase/firestore";
 
 //images
 import one from "../assets/one.png";
@@ -9,18 +9,34 @@ import four from "../assets/four.png";
 import five from "../assets/five.png";
 import three from "../assets/three.png";
 
+//features
+import app from "../features/firebase";
+
 //components
 import Cases from "../component/cases/cases";
 
 const Case_Studies = () => {
-  //local data
-  const [activeCase, setActiveCase] = React.useState("Financial Services");
+  //configs
+  const firestore = getFirestore(app);
 
-  const types = useSelector((state) => state.types.types);
+  //local data
+  const [types, setTypes] = React.useState([]);
+  const [activeCase, setActiveCase] = React.useState("financial services");
 
   const handleActiveType = (type) => {
     setActiveCase(type);
   };
+
+  useEffect(() => {
+    getDocs(collection(firestore, "types")).then((data) => {
+      let docs = data?.docs;
+      let types = [];
+      docs?.forEach((doc) => {
+        types.push(doc?.data());
+      });
+      setTypes(types);
+    });
+  }, []);
 
   return (
     <Container>
@@ -66,10 +82,12 @@ const Case_Studies = () => {
           {types?.map((item, _) => (
             <li
               key={_}
-              onClick={() => handleActiveType(item)}
-              className={item === activeCase ? "active" : ""}
+              onClick={() => handleActiveType(item?.name?.toLowerCase())}
+              className={
+                item?.name?.toLowerCase() === activeCase ? "active" : ""
+              }
             >
-              {item}
+              {item?.name}
             </li>
           ))}
         </ul>
