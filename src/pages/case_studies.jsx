@@ -21,7 +21,7 @@ const Case_Studies = () => {
 
   //local data
   const [types, setTypes] = React.useState([]);
-  const [activeCase, setActiveCase] = React.useState("financial services");
+  const [activeCase, setActiveCase] = React.useState(null);
 
   const handleActiveType = (type) => {
     setActiveCase(type);
@@ -32,9 +32,10 @@ const Case_Studies = () => {
       let docs = data?.docs;
       let types = [];
       docs?.forEach((doc) => {
-        types.push(doc?.data());
+        types.push({ id: doc.id, name: doc?.data().name });
       });
       setTypes(types);
+      setActiveCase(types[0]);
     });
   }, []);
 
@@ -82,10 +83,8 @@ const Case_Studies = () => {
           {types?.map((item, _) => (
             <li
               key={_}
-              onClick={() => handleActiveType(item?.name?.toLowerCase())}
-              className={
-                item?.name?.toLowerCase() === activeCase ? "active" : ""
-              }
+              onClick={() => handleActiveType(item)}
+              className={item?.id === activeCase?.id ? "active" : ""}
             >
               {item?.name}
             </li>

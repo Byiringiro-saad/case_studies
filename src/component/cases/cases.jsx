@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, getFirestore, getDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 
 //icons
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
@@ -18,33 +24,27 @@ const Cases = ({ activeType }) => {
   //local data
   const [index, setIndex] = useState(0);
   const [cases, setCases] = useState([]);
-  const activeCases = cases.filter(
-    (item) => item.type.toLowerCase() === activeType
-  );
 
   const handlePrevious = () => {
     const newIndex = index - 1;
-    setIndex(newIndex < 0 ? activeCases?.length - 1 : newIndex);
+    setIndex(newIndex < 0 ? cases?.length - 1 : newIndex);
   };
 
   const handleNext = () => {
     const newIndex = index + 1;
-    setIndex(newIndex >= activeCases?.length ? 0 : newIndex);
+    setIndex(newIndex >= cases?.length ? 0 : newIndex);
   };
 
   useEffect(() => {
-    getDocs(collection(firestore, "cases")).then((data) => {
-      let docs = data?.docs;
-      docs?.forEach((doc) => {
-        getDoc(doc?.data().type).then((data) => {
-          setCases((prev) => [
-            ...prev,
-            { ...doc?.data(), type: data?.data()?.name },
-          ]);
-        });
-      });
+    const q = query(
+      collection(firestore, "cases"),
+      where("type", "==", `${activeType?.id}`)
+    );
+
+    getDocs(q).then((data) => {
+      setCases(data?.docs?.map((doc) => doc?.data()));
     });
-  }, []);
+  }, [activeType]);
 
   return (
     <Container>
@@ -52,18 +52,18 @@ const Cases = ({ activeType }) => {
         <div className="direction" onClick={handlePrevious}>
           <BiChevronLeft />
         </div>
-        <p className="title">{activeCases[index]?.company}</p>
+        <p className="title">{cases[index]?.company}</p>
         <div className="direction" onClick={handleNext}>
           <BiChevronRight />
         </div>
       </div>
       <div className="content">
-        {activeCases.length === 0 ? (
+        {cases.length === 0 ? (
           <div className="none">
             <p>...</p>
           </div>
         ) : (
-          <Case case={activeCases[index]} data={activeCases[index]} />
+          <Case case={cases[index]} data={cases[index]} />
         )}
       </div>
     </Container>
