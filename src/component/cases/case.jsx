@@ -118,6 +118,12 @@ const Container = styled.div`
       align-items: center;
       justify-content: flex-start;
 
+      @media only screen and (max-width: 480px) {
+        height: 150px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       img {
         width: 120px;
         margin: 0 20px 0 0;

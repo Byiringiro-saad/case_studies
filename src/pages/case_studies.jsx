@@ -126,6 +126,10 @@ const Container = styled.div`
       width: 85%;
     }
 
+    @media only screen and (max-width: 480px) {
+      width: 97%;
+    }
+
     p.title {
       font-size: 2em;
       font-weight: 800;
@@ -156,6 +160,10 @@ const Container = styled.div`
       font-size: 1.2em;
       font-weight: 700;
       margin: 0 0 25px 0;
+
+      @media only screen and (max-width: 480px) {
+        text-align: center;
+      }
     }
 
     .content {
@@ -172,6 +180,10 @@ const Container = styled.div`
 
       @media only screen and (max-width: 768px) {
         width: 80%;
+      }
+
+      @media only screen and (max-width: 480px) {
+        width: 97%;
       }
 
       .box {
