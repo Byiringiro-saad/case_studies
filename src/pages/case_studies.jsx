@@ -122,11 +122,16 @@ const Container = styled.div`
     align-items: center;
     margin: 0 0 30px 0;
 
+    @media only screen and (max-width: 768px) {
+      width: 85%;
+    }
+
     p.title {
       font-size: 2em;
       font-weight: 800;
       color: var(--dark);
       margin: 20px 0;
+      text-align: center;
 
       span {
         color: var(--blue);
@@ -163,6 +168,10 @@ const Container = styled.div`
 
       @media only screen and (max-width: 1024px) {
         flex-wrap: wrap;
+      }
+
+      @media only screen and (max-width: 768px) {
+        width: 80%;
       }
 
       .box {
@@ -204,10 +213,11 @@ const Container = styled.div`
       flex-direction: column;
 
       @media only screen and (max-width: 1024px) {
-        width: 100%;
+        width: calc(100vw - 40px);
+        height: 50px;
         flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: nowrap;
+        overflow: scroll;
+        white-space: nowrap;
         margin: 0 0 20px 0;
       }
 
@@ -221,8 +231,12 @@ const Container = styled.div`
         cursor: pointer;
 
         @media only screen and (max-width: 1024px) {
-          margin: 0 7px 0 0;
+          width: auto;
+          margin: 0;
           padding: 0;
+          line-height: normal;
+          display: inline-block;
+          padding: 0 20px;
         }
 
         :hover {

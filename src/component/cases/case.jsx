@@ -165,11 +165,20 @@ const Container = styled.div`
     padding: 30px 0 30px 0;
     border-bottom: 1px solid var(--gray);
 
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
     .problem {
       width: 45%;
       height: auto;
       display: flex;
       flex-direction: column;
+
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+        margin: 0 0 20px 0;
+      }
 
       p.title {
         font-weight: 700;
@@ -183,6 +192,10 @@ const Container = styled.div`
         margin: 0 0 0 20px;
         flex-direction: column;
 
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
+
         li {
           color: var(--gray);
         }
@@ -194,6 +207,10 @@ const Container = styled.div`
       height: auto;
       display: flex;
       flex-direction: column;
+
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+      }
 
       p.title {
         font-weight: 700;
@@ -253,11 +270,20 @@ const Container = styled.div`
       flex-direction: row;
       justify-content: space-between;
 
+      @media only screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+
       .box {
         width: 32%;
         min-height: 100px;
         padding: 15px;
         background: #f2f2f2;
+
+        @media only screen and (max-width: 768px) {
+          width: 90%;
+          margin: 0 0 20px 0;
+        }
 
         p {
           color: var(--gray);
