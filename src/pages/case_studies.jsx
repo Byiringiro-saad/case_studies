@@ -57,23 +57,23 @@ const Case_Studies = () => {
         </p>
         <div className="content">
           <div className="box">
-            <img src={one} alt="one" />
+            {/* <img src={one} alt="one" /> */}
             <p>NLP</p>
           </div>
           <div className="box">
-            <img src={two} alt="two" />
+            {/* <img src={two} alt="two" /> */}
             <p>Computer Vision</p>
           </div>
           <div className="box">
-            <img src={three} alt="three" />
+            {/* <img src={three} alt="three" /> */}
             <p>Audio</p>
           </div>
           <div className="box">
-            <img src={four} alt="four" />
+            {/* <img src={four} alt="four" /> */}
             <p>Multimodal</p>
           </div>
           <div className="box">
-            <img src={five} alt="five" />
+            {/* <img src={five} alt="five" /> */}
             <p>Reinforcement Learning </p>
           </div>
         </div>
@@ -172,7 +172,7 @@ const Container = styled.div`
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
 
       @media only screen and (max-width: 1024px) {
         flex-wrap: wrap;
