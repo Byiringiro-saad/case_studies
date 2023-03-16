@@ -79,11 +79,26 @@ const Case = (props) => {
 
 const Container = styled.div`
   width: 100%;
-  min-height: 500px;
+  height: 930px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 20px;
+
+  @media only screen and (max-width: 1024px) {
+    height: 1000px;
+    padding: 0 10px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    height: 1400px;
+    padding: 0 10px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    height: 1700px;
+    padding: 0 10px;
+  }
 
   .head {
     width: 100%;
@@ -119,7 +134,7 @@ const Container = styled.div`
       justify-content: flex-start;
 
       @media only screen and (max-width: 480px) {
-        height: 150px;
+        height: 200px;
         flex-direction: column;
         align-items: flex-start;
       }
